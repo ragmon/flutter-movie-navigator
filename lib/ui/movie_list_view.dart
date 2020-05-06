@@ -3,19 +3,7 @@ import 'package:movienavigator/model/movie.dart';
 import 'package:movienavigator/ui/movie_list_view_details.dart';
 
 class MovieListView extends StatelessWidget {
-
   final List<Movie> movieList = Movie.getMovies();
-
-  final List movies = [
-    "Titanic",
-    "Blade Runner",
-    "Rambo",
-    "Avatar",
-    "I Am Legend",
-    "300",
-    "Game of Thrones",
-    "Vikings",
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +22,16 @@ class MovieListView extends StatelessWidget {
             child: ListTile(
               leading: CircleAvatar(
                 child: Container(
+                  width: 200,
+                  height: 200,
                   decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(movieList[index].images[0]),
+                      fit: BoxFit.cover,
+                    ),
                     borderRadius: BorderRadius.circular(13.9),
                   ),
-                  child: Text(movieList[index].title[0]),
+                  child: null,//Text(movieList[index].title[0]),
                 ),
               ),
               trailing: Text("..."),
@@ -48,7 +42,7 @@ class MovieListView extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => MovieListViewDetails(
-                      movieName: movieList[index].title,
+                      movie: movieList[index],
                     ),
                   ),
                 ),
