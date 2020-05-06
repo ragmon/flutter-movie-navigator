@@ -63,7 +63,17 @@ class MovieDetailsThumbnail extends StatelessWidget {
               color: Colors.white,
             )
           ],
-        )
+        ),
+        Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0x00f5f5f5), Color(0xfff5f5f5)],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          height: 80,
+        ),
       ],
     );
   }
