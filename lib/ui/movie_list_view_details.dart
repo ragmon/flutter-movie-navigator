@@ -20,18 +20,9 @@ class MovieListViewDetails extends StatelessWidget {
           HorizontalLine(),
           MovieDetailsCast(movie: movie),
           HorizontalLine(),
+          MovieDetailsExtraPosters(posters: movie.images),
         ],
       ),
-//      body: Center(
-//        child: Container(
-//          child: RaisedButton(
-//            child: Text("Go back ${this.movie.director}"),
-//            onPressed: () {
-//              Navigator.pop(context);
-//            },
-//          ),
-//        ),
-//      ),
     );
   }
 }
@@ -51,7 +42,7 @@ class MovieDetailsThumbnail extends StatelessWidget {
           children: <Widget>[
             Container(
               width: MediaQuery.of(context).size.width,
-              height: 190,
+              height: 170,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: NetworkImage(this.thumbnail),
@@ -141,6 +132,51 @@ class HorizontalLine extends StatelessWidget {
   }
 }
 
+class MovieDetailsExtraPosters extends StatelessWidget {
+  final List<String> posters;
+
+  const MovieDetailsExtraPosters({Key key, this.posters}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(left: 8),
+          child: Text(
+            "More Movie Posters".toUpperCase(),
+            style: TextStyle(
+              fontSize: 14,
+              color: Colors.black26,
+            ),
+          ),
+        ),
+        Container(
+          height: 178,
+          padding: EdgeInsets.symmetric(vertical: 16),
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            separatorBuilder: (context, index) => SizedBox(width: 8),
+            itemCount: posters.length,
+            itemBuilder: (context, index) => ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              child: Container(
+                width: MediaQuery.of(context).size.width / 4,
+                height: 160,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                  image: NetworkImage(posters[index]),
+                  fit: BoxFit.cover,
+                )),
+              ),
+            ),
+          ),
+        )
+      ],
+    );
+  }
+}
 
 class MovieDetailsCast extends StatelessWidget {
   final Movie movie;
